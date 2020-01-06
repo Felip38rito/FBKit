@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 //! Project version number for FBKit.
 FOUNDATION_EXPORT double FBKitVersionNumber;
@@ -15,5 +16,3 @@ FOUNDATION_EXPORT double FBKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char FBKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <FBKit/PublicHeader.h>
-
-
