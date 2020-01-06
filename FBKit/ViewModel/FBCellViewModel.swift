@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 public protocol FBIdentifiable {
     /// Interface builder identifier
     /// For interface builder generated cell views, for example
