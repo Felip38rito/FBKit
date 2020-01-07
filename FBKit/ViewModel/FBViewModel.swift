@@ -11,7 +11,7 @@ import UIKit
 public protocol FBViewModel {
     /// FBKit View Models are always linked to a single FBKit Model
     associatedtype Model: FBModel
-    /// Every view inherits from UIView
+    /// FBKit View layer for this ViewModel. They will always inherit UIView from UIKit
     associatedtype View: UIView
     /// ViewModel model instance as a readonly property
     var model: Model { set get }
