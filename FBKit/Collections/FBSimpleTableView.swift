@@ -11,6 +11,7 @@ import UIKit
 public class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewDelegate, UITableViewDataSource {
     /// The basic FB View Model for a MVVM strategy
     private var listData = [ViewModel]()
+    private var filteredData = [ViewModel]()
     /// The tableview object to be delegated
     private weak var tableView: UITableView!
     
@@ -21,6 +22,7 @@ public class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableVie
         super.init()
 
         self.listData = list
+        self.filteredData = list
         self.tableView = tableView
         
         self.tableView.delegate = self
@@ -49,12 +51,12 @@ public class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableVie
     // MARK: - Delegate and DataSource methods
     /// We'll only have a single section
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listData.count
+        return filteredData.count
     }
     
     /// For each ViewModel in our collection we'll generate a single view row
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let viewModel = listData[indexPath.row]
+        let viewModel = filteredData[indexPath.row]
          
         viewModel.prepareView(view: tableView.dequeueReusableCell(withIdentifier: viewModel.identifier, for: indexPath))
         
@@ -63,11 +65,17 @@ public class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableVie
     
     /// Setting up the height for the row
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return listData[indexPath.row].viewSize.height
+        return filteredData[indexPath.row].viewSize.height
     }
     
     /// A simple table view will have only one section
     public func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    /// Filter data to match some generic condition
+    public func filter(success: @escaping ((_ vm: ViewModel) -> Bool)) {
+        self.filteredData = self.listData.filter(success)
+        self.tableView.reloadData()
     }
 }

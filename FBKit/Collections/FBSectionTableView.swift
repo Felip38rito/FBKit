@@ -50,4 +50,6 @@ public class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FB
         
         return vm.view as! UITableViewCell
     }
+    
+    // @todo: Implement filter functionality
 }
