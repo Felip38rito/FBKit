@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewDelegate, UITableViewDataSource {
+open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewDelegate, UITableViewDataSource {
     /// The basic FB View Model for a MVVM strategy
     private var listData = [ViewModel]()
     private var filteredData = [ViewModel]()

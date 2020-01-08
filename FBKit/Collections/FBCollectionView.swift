@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
+open class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
     private weak var collectionView: UICollectionView!
     private var listData = [ViewModel]()
