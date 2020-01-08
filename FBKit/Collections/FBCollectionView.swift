@@ -13,7 +13,7 @@ open class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionV
     private weak var collectionView: UICollectionView!
     internal var original_components_list = [ViewModel]()
     /// The filtered object list that can be accessed in subclasses
-    internal var filtered_components_list = [ViewModel]()
+    public var filtered_components_list = [ViewModel]()
     
     /// Create a UICollectionView with MVVM strategy
     /// - Parameter viewModelList: A FBCellViewModel list to be translated into UICollectionViewCell's Models
