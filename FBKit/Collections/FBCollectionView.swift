@@ -12,8 +12,7 @@ open class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionV
     
     private weak var collectionView: UICollectionView!
     internal var original_components_list = [ViewModel]()
-    /// The filtered object list that can be accessed in subclasses
-    public var filtered_components_list = [ViewModel]()
+    internal var filtered_components_list = [ViewModel]()
     
     /// Create a UICollectionView with MVVM strategy
     /// - Parameter viewModelList: A FBCellViewModel list to be translated into UICollectionViewCell's Models
@@ -27,6 +26,20 @@ open class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionV
         self.collectionView = collectionView
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+    }
+    
+    /// The list count when used filter (get all if no filter is in use)
+    public var filtered_count: Int {
+        get {
+            return filtered_components_list.count
+        }
+    }
+    
+    /// The list object count regardless of filter
+    public var list_count: Int {
+        get {
+            return original_components_list.count
+        }
     }
     
     /// Add new items to the UICollectionView
