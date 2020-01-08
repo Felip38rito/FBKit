@@ -34,4 +34,9 @@ public extension FBModel {
             return String(data: self.jsonData, encoding: .utf8) ?? ""
         }
     }
+    
+    // Default Equatable structure
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.JSON == rhs.JSON
+    }
 }
