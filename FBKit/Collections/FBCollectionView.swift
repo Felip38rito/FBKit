@@ -74,6 +74,7 @@ open class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionV
     /// Remove all the components
     public func clean() {
         original_components_list.removeAll()
+        self.collectionView.reloadData()
     }
     
     // MARK: - Custom properties
