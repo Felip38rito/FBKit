@@ -71,6 +71,11 @@ open class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionV
         self.collectionView.reloadData()
     }
     
+    /// Remove all the components
+    public func clean() {
+        original_components_list.removeAll()
+    }
+    
     // MARK: - Custom properties
     /// The list count when used filter (get all if no filter is in use)
     public var filtered_count: Int {
