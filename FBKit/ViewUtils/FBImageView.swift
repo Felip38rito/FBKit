@@ -8,8 +8,22 @@
 
 import UIKit
 
-/// private cache object to store image objects
-fileprivate let cache = NSCache<NSString, UIImage>()
+/// A singleton who store cached images
+public class FBImageCache {
+    internal let cache = NSCache<NSString, UIImage>()
+    
+    public static let current = FBImageCache()
+    /// Impossible to instance from its own
+    private init() {  }
+    
+    public func store(image: UIImage, key: String) {
+        cache.setObject(image, forKey: key as NSString)
+    }
+    
+    public func get(key: String) -> UIImage? {
+        cache.object(forKey: key as NSString)
+    }
+}
 
 /// UIImageView extension to enable
 /// caching on loading from internet
@@ -28,7 +42,7 @@ public class FBImageView: UIImageView {
         /// Assing the url to this object for control
         self.imageURL = url
         
-        if let cached_object = cache.object(forKey: url as NSString) {
+        if let cached_object = FBImageCache.current.get(key: url) {
             self.image = cached_object
             return
         }
@@ -49,7 +63,8 @@ public class FBImageView: UIImageView {
                 }
                 
                 /// store the image object in cache
-                cache.setObject(image, forKey: url as NSString)
+//                FBImageCache.cache.setObject(image, forKey: url as NSString)
+                FBImageCache.current.store(image: image, key: url)
             }
         }
     }
