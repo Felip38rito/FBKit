@@ -15,6 +15,9 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     /// The tableview object to be delegated
     private weak var tableView: UITableView!
     
+    /// The delegate responsible to catch index visibility (for use in pagination for example)
+    public var indexDelegate: FBIndexDelegate?
+    
     /// Create a UITableView with the MVVM strategy
     /// - Parameter list: A list of ViewModels to be rendered as rows
     /// - Parameter tableView: A UITableView instance to be filled
@@ -61,6 +64,12 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
         viewModel.prepareView(view: tableView.dequeueReusableCell(withIdentifier: viewModel.identifier, for: indexPath))
         
         return viewModel.view as! UITableViewCell
+    }
+    
+    /// When the tableview display the index
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        indexDelegate?.willReachIndex(index: indexPath)
     }
     
     /// Setting up the height for the row
