@@ -21,7 +21,7 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     /// Create a UITableView with the MVVM strategy
     /// - Parameter list: A list of ViewModels to be rendered as rows
     /// - Parameter tableView: A UITableView instance to be filled
-    init(list: [ViewModel], tableView: UITableView) {
+    public init(list: [ViewModel], tableView: UITableView) {
         super.init()
 
         self.listData = list
