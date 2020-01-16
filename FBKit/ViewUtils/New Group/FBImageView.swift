@@ -33,7 +33,7 @@ public class FBImageView: UIImageView {
         
         if let cached_object = FBImageCache.current.get(key: url) {
             self.image = cached_object
-            self.delegate?.didLoadFromCache(key: url)
+            self.delegate?.didLoadFromCache(key: url, image: cached_object)
             return
         }
         /// If the delegate is active then the result of this method will say if the download will be maded

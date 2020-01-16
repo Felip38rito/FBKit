@@ -29,7 +29,7 @@ public extension FBImageDelegate {
         print("FBImageDelegate:", url, "download complete")
     }
     
-    func didLoadFromCache(key: String) {
+    func didLoadFromCache(key: String, image: UIImage) {
         print("FBImageDelegate:", key, "loaded from cache")
     }
 }
