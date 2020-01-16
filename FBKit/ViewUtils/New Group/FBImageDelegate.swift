@@ -19,7 +19,7 @@ public protocol FBImageDelegate {
 }
 
 /// I'll provide a default implementation for the methods above
-extension FBImageDelegate {
+public extension FBImageDelegate {
     func willDownload(url: String) -> Bool {
         print("FBImageDelegate: Downloading", url)
         return true
