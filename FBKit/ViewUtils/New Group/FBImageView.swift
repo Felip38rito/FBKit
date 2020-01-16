@@ -8,23 +8,6 @@
 
 import UIKit
 
-/// A singleton who store cached images
-public class FBImageCache {
-    internal let cache = NSCache<NSString, UIImage>()
-    
-    public static let current = FBImageCache()
-    /// Impossible to instance from its own
-    private init() {  }
-    
-    public func store(image: UIImage, key: String) {
-        cache.setObject(image, forKey: key as NSString)
-    }
-    
-    public func get(key: String) -> UIImage? {
-        cache.object(forKey: key as NSString)
-    }
-}
-
 /// UIImageView extension to enable
 /// caching on loading from internet
 /// and solve the "wrong image in collection error"
@@ -32,6 +15,10 @@ public class FBImageView: UIImageView {
     /// Control variable for showing or not the cached version
     /// correcting the behaviour of loading wrong image
     internal var imageURL: String?
+    
+    /// The default delegate of imageView
+    public var delegate: FBImageDelegate?
+    
     /**
      Load image from url via https and store in the cache before showing
      
@@ -44,9 +31,11 @@ public class FBImageView: UIImageView {
         
         if let cached_object = FBImageCache.current.get(key: url) {
             self.image = cached_object
+            self.delegate?.didLoadFromCache(key: url)
             return
         }
         
+        self.delegate?.willDownload(url: url)
         /// Download the image in a background thread
         DispatchQueue.global().async { [self] in
             guard let url_remote = URL(string: url) else { return }
@@ -60,6 +49,7 @@ public class FBImageView: UIImageView {
                 /// Only set the image when the url matches avoinding strange changes in collections
                 if self.imageURL == url {
                     self.image = image
+                    self.delegate?.didDownload(url: url)
                 }
                 
                 /// store the image object in cache
