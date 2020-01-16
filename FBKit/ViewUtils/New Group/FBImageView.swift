@@ -35,7 +35,9 @@ public class FBImageView: UIImageView {
             return
         }
         
-        if self.delegate?.willDownload(url: url) ?? true {
+        let willDownload = self.delegate?.willDownload(url: url) ?? true
+        
+        if willDownload {
             /// Download the image in a background thread
             DispatchQueue.global().async { [self] in
                 guard let url_remote = URL(string: url) else { return }
