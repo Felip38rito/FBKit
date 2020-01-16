@@ -11,7 +11,7 @@ import Foundation
 /// Control the lifecycle of an FBImageView when loading or storing images
 public protocol FBImageDelegate {
     /// Will download a image from internet
-    func willDownload(url: String)
+    func willDownload(url: String) -> Bool
     /// Did complete the download
     func didDownload(url: String)
     /// Did load from cache
@@ -20,8 +20,9 @@ public protocol FBImageDelegate {
 
 /// I'll provide a default implementation for the methods above
 extension FBImageDelegate {
-    func willDownload(url: String) {
+    func willDownload(url: String) -> Bool {
         print("FBImageDelegate: Downloading", url)
+        return true
     }
     
     func didDownload(url: String) {

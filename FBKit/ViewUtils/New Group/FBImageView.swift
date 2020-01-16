@@ -35,26 +35,27 @@ public class FBImageView: UIImageView {
             return
         }
         
-        self.delegate?.willDownload(url: url)
-        /// Download the image in a background thread
-        DispatchQueue.global().async { [self] in
-            guard let url_remote = URL(string: url) else { return }
-            guard let data = try? Data(contentsOf: url_remote) else { return }
-            
-            /// Setup the image in the main thread
-            DispatchQueue.main.async {
-                guard let image = UIImage(data: data) else { return }
+        if self.delegate?.willDownload(url: url) ?? true {
+            /// Download the image in a background thread
+            DispatchQueue.global().async { [self] in
+                guard let url_remote = URL(string: url) else { return }
+                guard let data = try? Data(contentsOf: url_remote) else { return }
                 
-                /// The bugfix verification:
-                /// Only set the image when the url matches avoinding strange changes in collections
-                if self.imageURL == url {
-                    self.image = image
-                    self.delegate?.didDownload(url: url)
+                /// Setup the image in the main thread
+                DispatchQueue.main.async {
+                    guard let image = UIImage(data: data) else { return }
+                    
+                    /// The bugfix verification:
+                    /// Only set the image when the url matches avoinding strange changes in collections
+                    if self.imageURL == url {
+                        self.image = image
+                        self.delegate?.didDownload(url: url)
+                    }
+                    
+                    /// store the image object in cache
+    //                FBImageCache.cache.setObject(image, forKey: url as NSString)
+                    FBImageCache.current.store(image: image, key: url)
                 }
-                
-                /// store the image object in cache
-//                FBImageCache.cache.setObject(image, forKey: url as NSString)
-                FBImageCache.current.store(image: image, key: url)
             }
         }
     }
