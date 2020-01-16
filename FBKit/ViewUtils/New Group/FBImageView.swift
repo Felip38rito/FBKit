@@ -15,6 +15,8 @@ public class FBImageView: UIImageView {
     /// Control variable for showing or not the cached version
     /// correcting the behaviour of loading wrong image
     internal var imageURL: String?
+    /// Control if the download will proceed or not
+    internal var proceedDownload: Bool = true
     
     /// The default delegate of imageView
     public var delegate: FBImageDelegate?
@@ -34,10 +36,12 @@ public class FBImageView: UIImageView {
             self.delegate?.didLoadFromCache(key: url)
             return
         }
+        /// If the delegate is active then the result of this method will say if the download will be maded
+        if let delegate = self.delegate {
+            proceedDownload = delegate.willDownload(url: url)
+        }
         
-        let willDownload = self.delegate?.willDownload(url: url) ?? true
-        
-        if willDownload {
+        if proceedDownload {
             /// Download the image in a background thread
             DispatchQueue.global().async { [self] in
                 guard let url_remote = URL(string: url) else { return }
