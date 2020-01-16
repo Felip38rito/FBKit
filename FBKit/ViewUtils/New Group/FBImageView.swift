@@ -38,7 +38,7 @@ public class FBImageView: UIImageView {
         }
         /// If the delegate is active then the result of this method will say if the download will be maded
         if let delegate = self.delegate {
-            proceedDownload = delegate.willDownload(url: url)
+            proceedDownload = delegate.willDownload(imageView: self, url: url)
         }
         
         if proceedDownload {
