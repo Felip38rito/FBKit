@@ -55,7 +55,7 @@ public class FBImageView: UIImageView {
                     /// Only set the image when the url matches avoinding strange changes in collections
                     if self.imageURL == url {
                         self.image = image
-                        self.delegate?.didDownload(url: url)
+                        self.delegate?.didDownload(url: url, image: image)
                     }
                     
                     /// store the image object in cache

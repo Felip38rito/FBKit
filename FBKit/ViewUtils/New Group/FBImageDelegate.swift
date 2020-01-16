@@ -13,9 +13,9 @@ public protocol FBImageDelegate {
     /// Will download a image from internet
     func willDownload(url: String) -> Bool
     /// Did complete the download
-    func didDownload(url: String)
+    func didDownload(url: String, image: UIImage)
     /// Did load from cache
-    func didLoadFromCache(key: String)
+    func didLoadFromCache(key: String, image: UIImage)
 }
 
 /// I'll provide a default implementation for the methods above
@@ -25,7 +25,7 @@ public extension FBImageDelegate {
         return true
     }
     
-    func didDownload(url: String) {
+    func didDownload(url: String, image: UIImage) {
         print("FBImageDelegate:", url, "download complete")
     }
     
