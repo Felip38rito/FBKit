@@ -78,10 +78,8 @@ open class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionV
     }
     
     /// Remove selected components by IndexPath on the original collection
-    public func remove(at: [IndexPath]) {
-        at.forEach { (indexPath) in
-            original_components_list.remove(at: indexPath.item)
-        }
+    public func remove(when: (ViewModel) -> Bool) {
+        self.original_components_list.removeAll(where: when)
         self.collectionView.reloadData()
     }
     
