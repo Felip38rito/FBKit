@@ -77,6 +77,14 @@ open class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionV
         self.collectionView.reloadData()
     }
     
+    /// Remove selected components by IndexPath on the original collection
+    public func remove(at: [IndexPath]) {
+        at.forEach { (indexPath) in
+            original_components_list.remove(at: indexPath.item)
+        }
+        self.collectionView.reloadData()
+    }
+    
     // MARK: - Custom properties
     /// The list count when used filter (get all if no filter is in use)
     public var filtered_count: Int {
