@@ -83,6 +83,11 @@ open class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionV
         self.collectionView.reloadData()
     }
     
+    /// Get a single component by it's indexPath
+    public func get(indexPath: IndexPath) -> ViewModel {
+        return original_components_list[indexPath.item]
+    }
+    
     // MARK: - Custom properties
     /// The list count when used filter (get all if no filter is in use)
     public var filtered_count: Int {
