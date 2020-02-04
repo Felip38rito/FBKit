@@ -87,4 +87,9 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
         self.filteredData = self.listData.filter(success)
         self.tableView.reloadData()
     }
+    
+    /// Get a single component by it's indexPath
+    public func get(indexPath: IndexPath) -> ViewModel {
+        return listData[indexPath.row]
+    }
 }

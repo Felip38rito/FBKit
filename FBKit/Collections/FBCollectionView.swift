@@ -85,7 +85,7 @@ open class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionV
     
     /// Get a single component by it's indexPath
     public func get(indexPath: IndexPath) -> ViewModel {
-        return original_components_list[indexPath.item]
+        return self.original_components_list[indexPath.item]
     }
     
     // MARK: - Custom properties
