@@ -51,5 +51,10 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
         return vm.view as! UITableViewCell
     }
     
+    /// Get a single component by it's indexPath
+    public func get(indexPath: IndexPath) -> ViewModel {
+        return listData[indexPath.section][indexPath.row]
+    }
+    
     // @todo: Implement filter functionality
 }
