@@ -21,6 +21,13 @@ import UIKit
             updateView()
         }
     }
+    
+    @IBInspectable public var borderWidth: CGFloat = 0.0 {
+        didSet {
+            self.layer.borderWidth = self.borderWidth
+            updateView()
+        }
+    }
 
     @IBInspectable public var isReversed: Bool = false {
         didSet {
@@ -61,35 +68,28 @@ import UIKit
         shapeBackgroundLayer.removeFromSuperlayer()
         shapeBorderLayer.removeFromSuperlayer()
         
+        /// Setup the gradient to be used
+        gradientBackgroundLayer.frame = self.bounds
+        gradientBackgroundLayer.cornerRadius = self.cornerRadius
+        gradientBackgroundLayer.startPoint = self.gradientStart
+        gradientBackgroundLayer.endPoint = self.gradientEnd
+        gradientBackgroundLayer.colors = [self.firstColor.cgColor, self.secondColor.cgColor]
+        
         if isReversed {
-//            self.layer.backgroundColor = UIColor.clear.cgColor
-//
-//            gradientBorderLayer.frame = self.bounds
-//            gradientBackgroundLayer.frame = self.bounds
-////
-//            gradientBorderLayer.cornerRadius = self.cornerRadius
-//            gradientBackgroundLayer.cornerRadius = self.cornerRadius
-////
-//            gradientBorderLayer.colors = [self.firstColor.cgColor, self.secondColor.cgColor]
-//            gradientBackgroundLayer.colors = [self.backgroundColor?.cgColor ?? UIColor.clear.cgColor]
-        }
-        else {
-//            gradientBorderLayer.frame = self.bounds
-            gradientBackgroundLayer.frame = self.bounds
+            /// Make the gradient to the border
+            self.setTitleColor(self.firstColor, for: .normal)
+            self.layer.backgroundColor = UIColor.clear.cgColor
             
-//            gradientBorderLayer.cornerRadius = self.cornerRadius
-            gradientBackgroundLayer.cornerRadius = self.cornerRadius
+            shapeBorderLayer.frame = self.bounds
+//            shapeBorderLayer.cornerRadius = self.cornerRadius
+            shapeBorderLayer.lineWidth = self.borderWidth
+            shapeBorderLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.cornerRadius).cgPath
+            shapeBorderLayer.fillColor = UIColor.clear.cgColor
             
-            gradientBackgroundLayer.startPoint = self.gradientStart
-            gradientBackgroundLayer.endPoint = self.gradientEnd
-////
-            gradientBackgroundLayer.colors = [self.firstColor.cgColor, self.secondColor.cgColor]
-            
-            self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
+            gradientBackgroundLayer.mask = shapeBorderLayer
         }
         
-//        self.layer.insertSublayer(gradientBorderLayer, at: 0)
-        
+        self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
     }
 }
 
