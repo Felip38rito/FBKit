@@ -1,8 +1,8 @@
 //
 //  FBButton.swift
-//  FBKit
+//  FBKit integration
 //
-//  Created by Felipe Correia on 05/01/20.
+//  Created by Felipe Correia on 05/02/20.
 //  Copyright © 2020 Felip38rito. All rights reserved.
 //
 
@@ -18,22 +18,29 @@ import UIKit
     @IBInspectable public var cornerRadius: CGFloat = 0.0 {
         didSet {
             self.layer.cornerRadius = self.cornerRadius
+            updateView()
         }
     }
-//
-//    @IBInspectable public var borderWidth : CGFloat = 0.0 {
-//        didSet {
-//            self.borderLayer.borderWidth = self.borderWidth
-//        }
-//    }
-//
+
     @IBInspectable public var isReversed: Bool = false {
         didSet {
             updateView()
         }
     }
-//
+    
     // MARK: - Gradient
+    @IBInspectable public var gradientStart: CGPoint = CGPoint(x:0, y:0) {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var gradientEnd: CGPoint = CGPoint(x:0, y:0) {
+        didSet {
+            updateView()
+        }
+    }
+    
     @IBInspectable public var firstColor: UIColor = UIColor.clear {
         didSet {
             updateView()
@@ -45,37 +52,8 @@ import UIKit
             updateView()
         }
     }
-//
-//    @IBInspectable public var borderColor : UIColor? {
-//        didSet {
-//            self.layer.borderColor = self.borderColor?.cgColor
-//        }
-//    }
-//
-//    /// Change the visual scale of the Button, with defaults to 1.0 (no scale transform)
-//    @IBInspectable public var fixedScale : CGFloat = 1.0 {
-//        didSet {
-//            self.transform = CGAffineTransform.identity.scaledBy(x: self.fixedScale, y: self.fixedScale)
-//        }
-//    }
-//
-//    /// The default layer for the buttons is the layer of gradient backgrounds
-//    public override class var layerClass: AnyClass {
-//        return CAGradientLayer.self
-//    }
-//
-//    /// The border separated layer
-//    public var borderLayer: CALayer {
-//        if isReversed {
-//
-//        } else {
-//
-//        }
-//
-//        return self.layer
-//    }
-//
-//    /// Update the visual when some var is setted
+    
+    /// Update the visual when some var is setted
     internal func updateView() {
         /// If it's added
         gradientBackgroundLayer.removeFromSuperlayer()
@@ -84,23 +62,34 @@ import UIKit
         shapeBorderLayer.removeFromSuperlayer()
         
         if isReversed {
-            self.layer.backgroundColor = UIColor.clear.cgColor
-            
-            gradientBorderLayer.frame = self.bounds
+//            self.layer.backgroundColor = UIColor.clear.cgColor
+//
+//            gradientBorderLayer.frame = self.bounds
+//            gradientBackgroundLayer.frame = self.bounds
+////
+//            gradientBorderLayer.cornerRadius = self.cornerRadius
+//            gradientBackgroundLayer.cornerRadius = self.cornerRadius
+////
+//            gradientBorderLayer.colors = [self.firstColor.cgColor, self.secondColor.cgColor]
+//            gradientBackgroundLayer.colors = [self.backgroundColor?.cgColor ?? UIColor.clear.cgColor]
+        }
+        else {
+//            gradientBorderLayer.frame = self.bounds
             gradientBackgroundLayer.frame = self.bounds
             
-            gradientBorderLayer.cornerRadius = self.cornerRadius
+//            gradientBorderLayer.cornerRadius = self.cornerRadius
             gradientBackgroundLayer.cornerRadius = self.cornerRadius
             
-            gradientBorderLayer.colors = [self.firstColor, self.secondColor]
-            gradientBackgroundLayer.colors = [self.backgroundColor ?? UIColor.clear]
+            gradientBackgroundLayer.startPoint = self.gradientStart
+            gradientBackgroundLayer.endPoint = self.gradientEnd
+////
+            gradientBackgroundLayer.colors = [self.firstColor.cgColor, self.secondColor.cgColor]
             
-        } else {
-            gradientBackgroundLayer.colors = [self.firstColor, self.secondColor]
-            gradientBackgroundLayer.cornerRadius = self.cornerRadius
+            self.layer.insertSublayer(gradientBackgroundLayer, at: 1)
         }
         
-        self.layer.insertSublayer(gradientBorderLayer, at: 0)
-        self.layer.insertSublayer(gradientBackgroundLayer, at: 1)
+//        self.layer.insertSublayer(gradientBorderLayer, at: 0)
+        
     }
 }
+
