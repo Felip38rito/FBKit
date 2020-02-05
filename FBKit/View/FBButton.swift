@@ -85,7 +85,7 @@ import UIKit
 ////
             gradientBackgroundLayer.colors = [self.firstColor.cgColor, self.secondColor.cgColor]
             
-            self.layer.insertSublayer(gradientBackgroundLayer, at: 1)
+            self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
         }
         
 //        self.layer.insertSublayer(gradientBorderLayer, at: 0)
