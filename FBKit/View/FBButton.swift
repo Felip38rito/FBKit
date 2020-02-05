@@ -22,7 +22,6 @@ import UIKit
     
     @IBInspectable public var borderWidth: CGFloat = 0.0 {
         didSet {
-//            self.layer.borderWidth = self.borderWidth
             updateView()
         }
     }
