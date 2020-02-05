@@ -10,8 +10,6 @@ import UIKit
 
 @IBDesignable public class FBButton: UIButton {
     let gradientBackgroundLayer = CAGradientLayer()
-    let gradientBorderLayer = CAGradientLayer()
-    let shapeBackgroundLayer = CAShapeLayer()
     let shapeBorderLayer = CAShapeLayer()
     
     // MARK: - Global Properties
@@ -25,6 +23,18 @@ import UIKit
     @IBInspectable public var borderWidth: CGFloat = 0.0 {
         didSet {
 //            self.layer.borderWidth = self.borderWidth
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var reversedTextColor: UIColor = UIColor.black {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var textColor: UIColor = UIColor.black {
+        didSet {
             updateView()
         }
     }
@@ -63,9 +73,8 @@ import UIKit
     /// Update the visual when some var is setted
     internal func updateView() {
         /// If it's added
+        self.setTitleColor(self.textColor, for: .normal)
         gradientBackgroundLayer.removeFromSuperlayer()
-        gradientBorderLayer.removeFromSuperlayer()
-        shapeBackgroundLayer.removeFromSuperlayer()
         shapeBorderLayer.removeFromSuperlayer()
         
         /// Setup the gradient to be used
@@ -77,14 +86,13 @@ import UIKit
         
         if isReversed {
             /// Make the gradient to the border
-            self.setTitleColor(self.firstColor, for: .normal)
-            self.layer.backgroundColor = UIColor.clear.cgColor
+            self.setTitleColor(self.reversedTextColor, for: .normal)
             
             shapeBorderLayer.frame = self.bounds
-//            shapeBorderLayer.cornerRadius = self.cornerRadius
             shapeBorderLayer.lineWidth = self.borderWidth
             shapeBorderLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.cornerRadius).cgPath
-            shapeBorderLayer.fillColor = UIColor.clear.cgColor
+            shapeBorderLayer.fillColor = nil
+            shapeBorderLayer.strokeColor = UIColor.black.cgColor
             
             gradientBackgroundLayer.mask = shapeBorderLayer
         }
