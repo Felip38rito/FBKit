@@ -37,13 +37,38 @@ import UIKit
     }
     
     // MARK: - Dash items
-    @IBInspectable public var dashWidth: CGFloat = 0.0 {
+    @IBInspectable public var dashWidth: CGFloat = 1.0 {
         didSet {
             updateView()
         }
     }
     
     @IBInspectable public var dashSpacing: CGFloat = 0.0 {
+        didSet {
+            updateView()
+        }
+    }
+    
+    // MARK: - Shadow
+    @IBInspectable public var shadowColor: UIColor = UIColor.clear {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var shadowSize: CGFloat = 0.0 {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var shadowOpacity: CGFloat = 1.0 {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var shadowOffset: CGSize = CGSize.zero {
         didSet {
             updateView()
         }
@@ -97,6 +122,14 @@ import UIKit
         shapeBorderLayer.lineDashPattern = [dashWidth, dashSpacing].map({ (value) -> NSNumber in
             return NSNumber(value: Float(value))
         })
+        
+        /// Setup the shadow
+        self.layer.shadowColor = shadowColor.cgColor
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.cornerRadius).cgPath
+        self.layer.shadowOffset = shadowOffset
+        self.layer.shadowRadius = shadowSize
+        self.layer.shadowOpacity = Float(min(max(shadowOpacity, 0), 1))
+        
         
         self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
         self.layer.insertSublayer(shapeBorderLayer, at: 1)
