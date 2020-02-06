@@ -99,4 +99,3 @@ import UIKit
         self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
     }
 }
-

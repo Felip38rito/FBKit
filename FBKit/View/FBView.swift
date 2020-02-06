@@ -11,62 +11,94 @@ import UIKit
 /// A simple UIView with some extra interface builder properties
 /// to make the implementation easier
 @IBDesignable public class FBView: UIView {
+    /// The gradient in the background
+    let gradientBackgroundLayer = CAGradientLayer()
+    /// The border as a shape to be able to change stroke behaviour
+    let shapeBorderLayer = CAShapeLayer()
     
+    // MARK: - Global properties
     @IBInspectable public var cornerRadius : CGFloat = 0.0 {
         didSet {
-            self.layer.cornerRadius = cornerRadius
-        }
-    }
-    
-    /// First color for the gradient background
-    @IBInspectable public var gradientFirstColor: UIColor = UIColor.clear {
-        didSet {
-            updateView()
-        }
-    }
-    
-    /// Second color for gradient background
-    @IBInspectable public var gradientSecondColor: UIColor = UIColor.clear {
-        didSet {
-            updateView()
-        }
-    }
-    
-    /// Define if the gradient either horizontal or vertical
-    @IBInspectable public var gradientIsHorizontal: Bool = true {
-        didSet {
+            self.layer.cornerRadius = self.cornerRadius
             updateView()
         }
     }
     
     @IBInspectable public var borderWidth: CGFloat = 0.0 {
         didSet {
-            self.layer.borderWidth = borderWidth
+            updateView()
         }
     }
     
     @IBInspectable public var borderColor: UIColor = UIColor.clear {
         didSet {
-            self.layer.borderColor = borderColor.cgColor
+            updateView()
         }
     }
     
-    override public class var layerClass: AnyClass {
-        get {
-            return CAGradientLayer.self
+    // MARK: - Dash items
+    @IBInspectable public var dashWidth: CGFloat = 0.0 {
+        didSet {
+            updateView()
         }
     }
     
-    /// Update the properties
-    private func updateView() {
-        let layer = self.layer as! CAGradientLayer
-        layer.colors = [gradientFirstColor, gradientSecondColor].map {$0.cgColor}
-        if (gradientIsHorizontal) {
-            layer.startPoint = CGPoint(x: 0, y: 0.5)
-            layer.endPoint = CGPoint (x: 1, y: 0.5)
-        } else {
-            layer.startPoint = CGPoint(x: 0.5, y: 0)
-            layer.endPoint = CGPoint (x: 0.5, y: 1)
+    @IBInspectable public var dashSpacing: CGFloat = 0.0 {
+        didSet {
+            updateView()
         }
+    }
+    
+    // MARK: - Gradient
+    @IBInspectable public var gradientStart: CGPoint = CGPoint(x:0, y:0) {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var gradientEnd: CGPoint = CGPoint(x:0, y:0) {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var firstColor: UIColor = UIColor.clear {
+        didSet {
+            updateView()
+        }
+    }
+
+    @IBInspectable public var secondColor: UIColor = UIColor.clear {
+        didSet {
+            updateView()
+        }
+    }
+    
+    /// Update the visual changes
+    internal func updateView() {
+        gradientBackgroundLayer.removeFromSuperlayer()
+        shapeBorderLayer.removeFromSuperlayer()
+        
+        /// Setup the gradient to be used in background
+        gradientBackgroundLayer.frame = self.bounds
+        gradientBackgroundLayer.cornerRadius = self.cornerRadius
+        gradientBackgroundLayer.startPoint = self.gradientStart
+        gradientBackgroundLayer.endPoint = self.gradientEnd
+        gradientBackgroundLayer.colors = [self.firstColor.cgColor, self.secondColor.cgColor]
+        
+        /// Setup the border
+        shapeBorderLayer.frame = self.bounds
+        shapeBorderLayer.lineWidth = self.borderWidth
+        shapeBorderLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.cornerRadius).cgPath
+        
+        shapeBorderLayer.fillColor = nil
+        shapeBorderLayer.strokeColor = borderColor.cgColor
+        
+        shapeBorderLayer.lineDashPattern = [dashWidth, dashSpacing].map({ (value) -> NSNumber in
+            return NSNumber(value: Float(value))
+        })
+        
+        self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
+        self.layer.insertSublayer(shapeBorderLayer, at: 1)
     }
 }
