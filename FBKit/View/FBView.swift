@@ -128,7 +128,10 @@ import UIKit
         self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.cornerRadius).cgPath
         self.layer.shadowOffset = shadowOffset
         self.layer.shadowRadius = shadowSize
-        self.layer.shadowOpacity = Float(min(max(shadowOpacity, 0), 1))
+        
+        if 0 <= shadowOpacity && shadowOpacity <= 1 {
+            self.layer.shadowOpacity = Float(shadowOpacity)
+        }
         
         self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
         self.layer.insertSublayer(shapeBorderLayer, at: 1)
