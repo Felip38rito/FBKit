@@ -104,6 +104,8 @@ public class FBImageView: UIImageView {
     
     internal func updateView() {
         /// Setup the border
+        shapeBorderLayer.removeFromSuperlayer()
+        
         shapeBorderLayer.frame = self.bounds
         shapeBorderLayer.lineWidth = self.borderWidth
         shapeBorderLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.cornerRadius).cgPath
@@ -114,6 +116,8 @@ public class FBImageView: UIImageView {
         shapeBorderLayer.lineDashPattern = [dashWidth, dashSpacing].map({ (value) -> NSNumber in
             return NSNumber(value: Float(value))
         })
+        
+        self.layer.insertSublayer(shapeBorderLayer, at: 0)
     }
     
     /**
