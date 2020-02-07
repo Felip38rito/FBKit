@@ -130,7 +130,6 @@ import UIKit
         self.layer.shadowRadius = shadowSize
         self.layer.shadowOpacity = Float(min(max(shadowOpacity, 0), 1))
         
-        
         self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
         self.layer.insertSublayer(shapeBorderLayer, at: 1)
     }

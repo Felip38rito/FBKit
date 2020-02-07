@@ -11,15 +11,23 @@ import UIKit
 /// UIImageView extension to enable
 /// caching on loading from internet
 /// and solve the "wrong image in collection error"
+@IBDesignable
 public class FBImageView: UIImageView {
     /// Control variable for showing or not the cached version
     /// correcting the behaviour of loading wrong image
     internal var imageURL: String?
     /// Control if the download will proceed or not
     internal var proceedDownload: Bool = true
-    
     /// The default delegate of imageView
     public var delegate: FBImageDelegate?
+    
+    /// Inspectables to approxime to FBView
+    @IBInspectable public var cornerRadius : CGFloat = 0.0 {
+        didSet {
+            self.layer.cornerRadius = self.cornerRadius
+//            updateView()
+        }
+    }
     
     /**
      Load image from url via https and store in the cache before showing
