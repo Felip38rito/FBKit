@@ -21,11 +21,39 @@ public class FBImageView: UIImageView {
     /// The default delegate of imageView
     public var delegate: FBImageDelegate?
     
-    /// Inspectables to approxime to FBView
+    /// The border as a shape to be able to change stroke behaviour
+    let shapeBorderLayer = CAShapeLayer()
+    
+    // MARK: - Global properties
     @IBInspectable public var cornerRadius : CGFloat = 0.0 {
         didSet {
             self.layer.cornerRadius = self.cornerRadius
-//            updateView()
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var borderWidth: CGFloat = 0.0 {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var borderColor: UIColor = UIColor.clear {
+        didSet {
+            updateView()
+        }
+    }
+    
+    // MARK: - Dash items
+    @IBInspectable public var dashWidth: CGFloat = 1.0 {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable public var dashSpacing: CGFloat = 0.0 {
+        didSet {
+            updateView()
         }
     }
     
@@ -72,6 +100,20 @@ public class FBImageView: UIImageView {
                 }
             }
         }
+    }
+    
+    internal func updateView() {
+        /// Setup the border
+        shapeBorderLayer.frame = self.bounds
+        shapeBorderLayer.lineWidth = self.borderWidth
+        shapeBorderLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.cornerRadius).cgPath
+        
+        shapeBorderLayer.fillColor = nil
+        shapeBorderLayer.strokeColor = borderColor.cgColor
+        
+        shapeBorderLayer.lineDashPattern = [dashWidth, dashSpacing].map({ (value) -> NSNumber in
+            return NSNumber(value: Float(value))
+        })
     }
     
     /**
