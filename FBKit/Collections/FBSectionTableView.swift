@@ -60,27 +60,4 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
     }
     
     // @todo: Implement filter functionality
-    
-    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UIContextualAction]? {
-        
-        let action = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
-            print("test")
-            completionHandler(true)
-        }
-        
-//        let action = UITableViewRowAction(style: .destructive, title: "Delete") { (_, index) in
-//            // delete model object at the index
-////            self.models[index.row]
-////            // then delete the cell
-////            tableView.beginUpdates()
-////            tableView.deleteRows(at: [index], with: .automatic)
-////            tableView.endUpdates()
-//
-//        }
-        return [action]
-    }
 }
