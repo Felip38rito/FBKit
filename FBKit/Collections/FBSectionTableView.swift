@@ -60,4 +60,16 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
     }
     
     // @todo: Implement filter functionality
+    
+    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            tableView.reloadData()
+        }
+
+    }
 }
