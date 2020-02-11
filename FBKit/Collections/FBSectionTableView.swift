@@ -34,9 +34,8 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let vm = sectionData[section]
-        vm.prepareView(view: tableView.dequeueReusableCell(withIdentifier: vm.identifier, for: IndexPath(row: 0, section: section)))
         
-        return vm.view
+        return vm.prepareView(view: tableView.dequeueReusableCell(withIdentifier: vm.identifier, for: IndexPath(row: 0, section: section))) as UIView
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,9 +45,7 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let vm = listData[indexPath.section][indexPath.row]
         
-        vm.prepareView(view: tableView.dequeueReusableCell(withIdentifier: vm.identifier, for: indexPath))
-        
-        return vm.view as! UITableViewCell
+        return vm.prepareView(view: tableView.dequeueReusableCell(withIdentifier: vm.identifier, for: indexPath)) as! UITableViewCell
     }
     
     /// Get a single component by it's indexPath

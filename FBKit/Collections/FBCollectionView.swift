@@ -41,9 +41,7 @@ open class FBCollectionView<ViewModel: FBCellViewModel>: NSObject, UICollectionV
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let vm = filtered_components_list[indexPath.row]
-        vm.prepareView(view: collectionView.dequeueReusableCell(withReuseIdentifier: vm.identifier, for: indexPath))
-        
-        return vm.view as! UICollectionViewCell
+        return vm.prepareView(view: collectionView.dequeueReusableCell(withReuseIdentifier: vm.identifier, for: indexPath)) as! UICollectionViewCell
     }
     
     /// The size of the cell component come from ViewModel

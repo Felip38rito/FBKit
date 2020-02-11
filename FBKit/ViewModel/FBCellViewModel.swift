@@ -34,7 +34,7 @@ public protocol FBCellViewModel: FBViewModel & FBIdentifiable {
      This way, we can create components like FBCollectionView and FBSimpleTableView from generic approach
      using either IB or custom code for ViewModels's visual layer
     */
-    func prepareView(view: UIView)
+    func prepareView(view: UIView) -> View
     
     /**
      Size of the view in ViewModel
