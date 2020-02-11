@@ -37,6 +37,12 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
         
         return vm.prepareView(view: tableView.dequeueReusableCell(withIdentifier: vm.identifier, for: IndexPath(row: 0, section: section))) as UIView
     }
+    
+    /// Height for the headers
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let vm = sectionData[section]
+        return vm.viewSize.height
+    }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listData[section].count
