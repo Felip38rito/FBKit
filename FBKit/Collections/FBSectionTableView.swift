@@ -15,7 +15,7 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
     
     /// Create a section enabled UITableView with the MVVM strategy
     /// - Parameter list: A list of ViewModels to be rendered as rows
-    init(list: [[ViewModel]], sections: [SectionViewModel], tableView: UITableView) {
+    public init(list: [[ViewModel]], sections: [SectionViewModel], tableView: UITableView) {
         super.init()
 
         self.listData = list
