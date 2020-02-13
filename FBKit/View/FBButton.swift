@@ -69,6 +69,13 @@ import UIKit
         }
     }
     
+    /// The possibility to update the visual layers on update the constraints
+    public override func updateConstraints() {
+        super.updateConstraints()
+        
+        updateView()
+    }
+    
     /// Update the visual when some var is setted
     internal func updateView() {
         /// If it's added
