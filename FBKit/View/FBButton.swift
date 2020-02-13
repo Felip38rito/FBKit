@@ -69,14 +69,8 @@ import UIKit
         }
     }
     
-    /// The possibility to update the visual layers on update the constraints
-    public override func updateConstraints() {
-        updateView()
-        super.updateConstraints()
-    }
-    
     /// Update the visual when some var is setted
-    internal func updateView() {
+    public func updateView() {
         /// If it's added
         self.setTitleColor(self.textColor, for: .normal)
         gradientBackgroundLayer.removeFromSuperlayer()
