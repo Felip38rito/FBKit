@@ -66,5 +66,8 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
         
     }
     
+    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+    }
     // @todo: Implement filter functionality
 }
