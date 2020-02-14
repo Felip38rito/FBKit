@@ -65,7 +65,7 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     }
     
     /// When the tableview display the index
-    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         indexDelegate?.willReachIndex(index: indexPath)
     }
@@ -89,5 +89,12 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     /// Get a single component by it's indexPath
     public func get(indexPath: IndexPath) -> ViewModel {
         return listData[indexPath.row]
+    }
+    
+    /// I've noticed that I can't run this method by extending FBSimpleTableView and then implementing
+    /// although that class would be the delegate. So, i just pass through and let the implementation
+    /// extend this method if needed
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
 }

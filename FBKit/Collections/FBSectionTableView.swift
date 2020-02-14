@@ -59,5 +59,12 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
         return listData[indexPath.section][indexPath.row]
     }
     
+    /// I've noticed that I can't run this method by extending FBSimpleTableView and then implementing
+    /// although that class would be the delegate. So, i just pass through and let the implementation
+    /// extend this method if needed
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
     // @todo: Implement filter functionality
 }
