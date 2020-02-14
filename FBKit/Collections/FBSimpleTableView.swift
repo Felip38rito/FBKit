@@ -87,8 +87,8 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     }
     
     /// Get a single component by it's indexPath
-    public func get(indexPath: IndexPath) -> ViewModel {
-        return listData[indexPath.row]
+    public func get(indexPath: IndexPath, filtered: Bool = true) -> ViewModel {
+        return (filtered) ? filteredData[indexPath.row] : listData[indexPath.row]
     }
     
     /// I've noticed that I can't run this method by extending FBSimpleTableView and then implementing
