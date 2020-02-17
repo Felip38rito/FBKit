@@ -96,9 +96,7 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
 //        let vm = (filtered) ? filteredData[indexPath.row] : listData[indexPath.row]
         var vm = filteredData[indexPath.row]
         
-        if let cell = self.tableView.dequeueReusableCell(withIdentifier: vm.identifier) {
-            vm.view = vm.prepareView(view: cell)
-        }
+        vm.view = vm.prepareView(view: tableView(tableView, cellForRowAt: indexPath))
         
         return vm
     }
