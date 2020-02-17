@@ -61,11 +61,9 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = filteredData[indexPath.row]
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.identifier) {
-            return viewModel.prepareView(view: cell) as! UITableViewCell
-        }
+        return viewModel.prepareView(view: tableView.dequeueReusableCell(withIdentifier: viewModel.identifier, for: indexPath)) as! UITableViewCell
          
-        return UITableViewCell()
+//        return UITableViewCell()
     }
     
     /// When the tableview display the index
