@@ -60,8 +60,12 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     /// For each ViewModel in our collection we'll generate a single view row
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = filteredData[indexPath.row]
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.identifier) {
+            return viewModel.prepareView(view: cell) as! UITableViewCell
+        }
          
-        return viewModel.prepareView(view: tableView.dequeueReusableCell(withIdentifier: viewModel.identifier, for: indexPath)) as! UITableViewCell
+        return UITableViewCell()
     }
     
     /// When the tableview display the index
@@ -91,8 +95,11 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
         /// Since the
 //        let vm = (filtered) ? filteredData[indexPath.row] : listData[indexPath.row]
         var vm = filteredData[indexPath.row]
-//        vm.view = vm.prepareView(view: self.tableView(tableView, cellForRowAt: indexPath))
-        vm.view = vm.prepareView(view: self.tableView.dequeueReusableCell(withIdentifier: vm.identifier, for: indexPath))
+        
+        if let cell = self.tableView.dequeueReusableCell(withIdentifier: vm.identifier) {
+            vm.view = vm.prepareView(view: cell)
+        }
+        
         return vm
     }
     
