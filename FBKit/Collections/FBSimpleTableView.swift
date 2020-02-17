@@ -61,11 +61,13 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = filteredData[indexPath.row]
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.identifier) {
-            return viewModel.prepareView(view: cell) as! UITableViewCell
-        }
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.identifier) {
+//            return viewModel.prepareView(view: cell) as! UITableViewCell
+//        }
         
-        return UITableViewCell()
+        return viewModel.prepareView(view: tableView.dequeueReusableCell(withIdentifier: viewModel.identifier, for: indexPath)) as! UITableViewCell
+        
+//        return UITableViewCell()
     }
     
     /// When the tableview display the index
@@ -96,7 +98,11 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
 //        let vm = (filtered) ? filteredData[indexPath.row] : listData[indexPath.row]
         var vm = filteredData[indexPath.row]
         
-        vm.view = vm.prepareView(view: tableView(tableView, cellForRowAt: indexPath))
+//        vm.view = vm.prepareView(view: tableView(tableView, cellForRowAt: indexPath))
+//        vm.view = vm.prepareView(view: tableView.cellForRow(at: indexPath) as! UIView)
+        if let cell = tableView.cellForRow(at: indexPath) {
+            vm.view = vm.prepareView(view: cell)
+        }
         
         return vm
     }
