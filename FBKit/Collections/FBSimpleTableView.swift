@@ -61,13 +61,7 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = filteredData[indexPath.row]
         
-//        if let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.identifier) {
-//            return viewModel.prepareView(view: cell) as! UITableViewCell
-//        }
-        
         return viewModel.prepareView(view: tableView.dequeueReusableCell(withIdentifier: viewModel.identifier, for: indexPath)) as! UITableViewCell
-        
-//        return UITableViewCell()
     }
     
     /// When the tableview display the index
@@ -94,12 +88,8 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     
     /// Get a single component by it's indexPath
     public func get(indexPath: IndexPath /*, filtered: Bool = true */) -> ViewModel {
-        /// Since the
-//        let vm = (filtered) ? filteredData[indexPath.row] : listData[indexPath.row]
         var vm = filteredData[indexPath.row]
         
-//        vm.view = vm.prepareView(view: tableView(tableView, cellForRowAt: indexPath))
-//        vm.view = vm.prepareView(view: tableView.cellForRow(at: indexPath) as! UIView)
         if let cell = tableView.cellForRow(at: indexPath) {
             vm.view = vm.prepareView(view: cell)
         }
@@ -110,11 +100,9 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     /// I've noticed that I can't run this method by extending FBSimpleTableView and then implementing
     /// although that class would be the delegate. So, i just pass through and let the implementation
     /// extend this method if needed
-    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { }
     
-    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
-    }
+    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) { }
+    
+    open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? { return nil }
 }
