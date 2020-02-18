@@ -62,13 +62,12 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
     /// I've noticed that I can't run this method by extending FBSimpleTableView and then implementing
     /// although that class would be the delegate. So, i just pass through and let the implementation
     /// extend this method if needed
-    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { }
     
-    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
-    }
+    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) { }
+    
+    open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return false }
+    
     // @todo: Implement filter functionality
     @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? { return nil }
