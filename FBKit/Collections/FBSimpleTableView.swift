@@ -104,5 +104,6 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     
     open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) { }
     
+    @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? { return nil }
 }

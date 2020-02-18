@@ -70,4 +70,6 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
         
     }
     // @todo: Implement filter functionality
+    @available(iOS 11.0, *)
+    open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? { return nil }
 }
