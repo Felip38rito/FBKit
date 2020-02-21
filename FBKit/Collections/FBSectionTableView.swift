@@ -66,7 +66,7 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
     
     open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) { }
     
-    open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return false }
+    open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return true }
     
     // @todo: Implement filter functionality
     @available(iOS 11.0, *)
