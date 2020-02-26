@@ -14,7 +14,6 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
     private var listData = [[ViewModel]]()
     private var sectionData = [SectionViewModel]()
     
-    
     public var leadingActions: UISwipeActionsConfiguration?
     public var trailingActions: UISwipeActionsConfiguration?
     
@@ -62,6 +61,20 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
     /// Get a single component by it's indexPath
     public func get(indexPath: IndexPath) -> ViewModel {
         return listData[indexPath.section][indexPath.row]
+    }
+    
+    /// Remove a single item by its indexPath
+    public func remove(at indexPath: IndexPath) {
+        /// Caso haja somente um item nesta section vamos apagar a section toda
+        if listData[indexPath.section].count == 1 {
+            listData.remove(at: indexPath.section)
+            sectionData.remove(at: indexPath.section)
+        } else {
+            listData[indexPath.section].remove(at: indexPath.row)
+        }
+        
+        /// Now the animation:
+        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     /// I've noticed that I can't run this method by extending FBSimpleTableView and then implementing
