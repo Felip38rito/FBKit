@@ -13,6 +13,9 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
     private var listData = [[ViewModel]]()
     private var sectionData = [SectionViewModel]()
     
+    public var leadingActions: UISwipeActionsConfiguration?
+    public var trailingActions: UISwipeActionsConfiguration?
+    
     /// Create a section enabled UITableView with the MVVM strategy
     /// - Parameter list: A list of ViewModels to be rendered as rows
     public init(list: [[ViewModel]], sections: [SectionViewModel], tableView: UITableView) {
@@ -65,5 +68,14 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { }
     
     open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) { }
-
+    
+    /// For the case of leading and trailing action configurations, we'll use a property to set these actions
+    /// So we can change them like before. Initializing
+    open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return leadingActions
+    }
+    
+    open func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return trailingActions
+    }
 }
