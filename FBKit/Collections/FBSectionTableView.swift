@@ -8,10 +8,12 @@
 
 import UIKit
 
+@available(iOS 11.0, *)
 open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCellViewModel>: NSObject, UITableViewDelegate, UITableViewDataSource {
     private weak var tableView: UITableView!
     private var listData = [[ViewModel]]()
     private var sectionData = [SectionViewModel]()
+    
     
     public var leadingActions: UISwipeActionsConfiguration?
     public var trailingActions: UISwipeActionsConfiguration?
