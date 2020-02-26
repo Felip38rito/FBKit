@@ -69,12 +69,11 @@ open class FBSectionTableView<ViewModel: FBCellViewModel, SectionViewModel: FBCe
         if listData[indexPath.section].count == 1 {
             listData.remove(at: indexPath.section)
             sectionData.remove(at: indexPath.section)
+            tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
         } else {
             listData[indexPath.section].remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-        
-        /// Now the animation:
-        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     /// I've noticed that I can't run this method by extending FBSimpleTableView and then implementing
