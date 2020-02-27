@@ -53,12 +53,12 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     
     // MARK: - Delegate and DataSource methods
     /// We'll only have a single section
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredData.count
     }
     
     /// For each ViewModel in our collection we'll generate a single view row
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = filteredData[indexPath.row]
         
         return viewModel.prepareView(view: tableView.dequeueReusableCell(withIdentifier: viewModel.identifier, for: indexPath)) as! UITableViewCell
@@ -71,23 +71,23 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
     }
     
     /// Setting up the height for the row
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return filteredData[indexPath.row].viewSize.height
     }
     
     /// A simple table view will have only one section
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     /// Filter data to match some generic condition
-    public func filter(success: @escaping ((_ vm: ViewModel) -> Bool)) {
+    open func filter(success: @escaping ((_ vm: ViewModel) -> Bool)) {
         self.filteredData = self.listData.filter(success)
         self.tableView.reloadData()
     }
     
     /// Get a single component by it's indexPath
-    public func get(indexPath: IndexPath /*, filtered: Bool = true */) -> ViewModel {
+    open func get(indexPath: IndexPath /*, filtered: Bool = true */) -> ViewModel {
         var vm = filteredData[indexPath.row]
         
         if let cell = tableView.cellForRow(at: indexPath) {
