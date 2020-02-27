@@ -12,9 +12,9 @@ import UIKit
 /// to make the implementation easier
 @IBDesignable public class FBView: UIView {
     /// The gradient in the background
-    let gradientBackgroundLayer = CAGradientLayer()
+    public let gradientBackgroundLayer = CAGradientLayer()
     /// The border as a shape to be able to change stroke behaviour
-    let shapeBorderLayer = CAShapeLayer()
+    public let shapeBorderLayer = CAShapeLayer()
     
     // MARK: - Global properties
     @IBInspectable public var cornerRadius : CGFloat = 0.0 {
