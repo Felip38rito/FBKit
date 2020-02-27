@@ -32,6 +32,24 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
         self.tableView.dataSource = self
     }
     
+    public var filteredCount: Int {
+        get {
+            return filteredData.count
+        }
+    }
+    
+    public var count: Int {
+        get {
+            return listData.count
+        }
+    }
+    
+    open var section: Int {
+        get {
+            return 0
+        }
+    }
+    
     /// Add rows to UITableView
     /// - Parameter itemsToAdd: A list of aditional items to be added
     public func add(_ items: [ViewModel]) {
@@ -39,7 +57,7 @@ open class FBSimpleTableView<ViewModel: FBCellViewModel>: NSObject, UITableViewD
         var i = listData.count - 1
         let indexPaths = items.map { (viewModel) -> IndexPath in
             i += 1
-            return IndexPath(row: i, section: 0)
+            return IndexPath(row: i, section: self.section)
         }
         
         // Atualiza o modelo
