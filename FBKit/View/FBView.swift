@@ -10,7 +10,7 @@ import UIKit
 
 /// A simple UIView with some extra interface builder properties
 /// to make the implementation easier
-@IBDesignable public class FBView: UIView {
+@IBDesignable open class FBView: UIView {
     /// The gradient in the background
     public let gradientBackgroundLayer = CAGradientLayer()
     /// The border as a shape to be able to change stroke behaviour
