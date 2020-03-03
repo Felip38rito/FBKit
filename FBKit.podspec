@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "FBKit"
-  spec.version      = "0.0.3"
+  spec.version      = "0.0.4"
   spec.summary      = "A very simple framework to help develop iOS apps"
 
   # This description is used to generate tags and improve search results.
