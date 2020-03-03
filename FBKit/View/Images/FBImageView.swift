@@ -63,7 +63,7 @@ public class FBImageView: UIImageView {
      - Parameter url: URL in string to load from
     */
     public func load(from url: String) {
-        self.image = nil
+//        self.image = nil
         /// Assing the url to this object for control
         self.imageURL = url
         
