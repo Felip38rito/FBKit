@@ -13,45 +13,45 @@ open class FBLayoutConstraint: NSLayoutConstraint {
     
     internal var previousConstantValue: CGFloat = 0.0
     
-    @IBInspectable open var constantForPhoneSE: CGFloat = 0.0 {
+    @IBInspectable open var valueForSE: CGFloat = 0.0 {
         didSet {
             if UIDevice.current.iPhone {
                 if UIDevice.current.screenFamily == .iPhoneSmall {
                     previousConstantValue = self.constant
-                    self.constant = self.constantForPhoneSE
+                    self.constant = self.valueForSE
                 }
             }
         }
     }
     
-    @IBInspectable open var constantForPhone8: CGFloat = 0.0 {
+    @IBInspectable open var valueFor8: CGFloat = 0.0 {
         didSet {
             if UIDevice.current.iPhone {
                 if UIDevice.current.screenFamily == .iPhoneStandard {
                     previousConstantValue = self.constant
-                    self.constant = self.constantForPhone8
+                    self.constant = self.valueFor8
                 }
             }
         }
     }
     
-    @IBInspectable open var constantForPhoneX: CGFloat = 0.0 {
+    @IBInspectable open var valueForX: CGFloat = 0.0 {
         didSet {
             if UIDevice.current.iPhone {
                 if UIDevice.current.screenFamily == .iPhoneX {
                     previousConstantValue = self.constant
-                    self.constant = self.constantForPhoneX
+                    self.constant = self.valueForX
                 }
             }
         }
     }
     
-    @IBInspectable open var constantForPhonePlus: CGFloat = 0.0 {
+    @IBInspectable open var valueForPhonePlus: CGFloat = 0.0 {
         didSet {
             if UIDevice.current.iPhone {
                 if UIDevice.current.screenFamily == .iPhonePlus {
                     previousConstantValue = self.constant
-                    self.constant = self.constantForPhonePlus
+                    self.constant = self.valueForPhonePlus
                 }
             }
         }
