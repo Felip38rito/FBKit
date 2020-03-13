@@ -106,6 +106,9 @@ import UIKit
         gradientBackgroundLayer.removeFromSuperlayer()
         shapeBorderLayer.removeFromSuperlayer()
         
+        gradientBackgroundLayer.needsDisplayOnBoundsChange = true
+        shapeBorderLayer.needsDisplayOnBoundsChange = true
+        
         /// Setup the gradient to be used in background
         gradientBackgroundLayer.frame = self.bounds
         gradientBackgroundLayer.cornerRadius = self.cornerRadius
