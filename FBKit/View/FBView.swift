@@ -103,6 +103,8 @@ import UIKit
     open override func layoutSubviews() {
         super.layoutSubviews()
         
+        print("LayoutSubviews called on FBView instance...")
+        
         gradientBackgroundLayer.removeFromSuperlayer()
         shapeBorderLayer.removeFromSuperlayer()
         
