@@ -16,30 +16,35 @@ import UIKit
     @IBInspectable public var cornerRadius: CGFloat = 0.0 {
         didSet {
             self.layer.cornerRadius = self.cornerRadius
+            setNeedsLayout()
             updateView()
         }
     }
     
     @IBInspectable public var borderWidth: CGFloat = 0.0 {
         didSet {
+            setNeedsLayout()
             updateView()
         }
     }
     
     @IBInspectable public var reversedTextColor: UIColor = UIColor.black {
         didSet {
+            setNeedsLayout()
             updateView()
         }
     }
     
     @IBInspectable public var textColor: UIColor = UIColor.black {
         didSet {
+            setNeedsLayout()
             updateView()
         }
     }
 
     @IBInspectable public var isReversed: Bool = false {
         didSet {
+            setNeedsLayout()
             updateView()
         }
     }
@@ -47,24 +52,28 @@ import UIKit
     // MARK: - Gradient
     @IBInspectable public var gradientStart: CGPoint = CGPoint(x:0, y:0) {
         didSet {
+            setNeedsLayout()
             updateView()
         }
     }
     
     @IBInspectable public var gradientEnd: CGPoint = CGPoint(x:0, y:0) {
         didSet {
+            setNeedsLayout()
             updateView()
         }
     }
     
     @IBInspectable public var firstColor: UIColor = UIColor.clear {
         didSet {
+            setNeedsLayout()
             updateView()
         }
     }
 
     @IBInspectable public var secondColor: UIColor = UIColor.clear {
         didSet {
+            setNeedsLayout()
             updateView()
         }
     }
@@ -96,6 +105,15 @@ import UIKit
             gradientBackgroundLayer.mask = shapeBorderLayer
         }
         
+        self.layer.frame = self.frame
         self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        print("LayoutSubviews called on FBView instance...")
+        
+        updateView()
     }
 }
