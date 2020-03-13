@@ -101,6 +101,8 @@ import UIKit
     
     /// Update the visual changes
     open override func layoutSubviews() {
+        super.layoutSubviews()
+        
         gradientBackgroundLayer.removeFromSuperlayer()
         shapeBorderLayer.removeFromSuperlayer()
         
@@ -136,8 +138,4 @@ import UIKit
         self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
         self.layer.insertSublayer(shapeBorderLayer, at: 1)
     }
-    
-//    open override func layoutSubviews() {
-//        updateView()
-//    }
 }
