@@ -100,7 +100,7 @@ import UIKit
     }
     
     /// Update the visual changes
-    internal func updateView() {
+    public func updateView() {
         gradientBackgroundLayer.removeFromSuperlayer()
         shapeBorderLayer.removeFromSuperlayer()
         
