@@ -21,18 +21,30 @@ import UIKit
         didSet {
             self.layer.cornerRadius = self.cornerRadius
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
     @IBInspectable public var borderWidth: CGFloat = 0.0 {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
     @IBInspectable public var borderColor: UIColor = UIColor.clear {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
@@ -40,12 +52,20 @@ import UIKit
     @IBInspectable public var dashWidth: CGFloat = 1.0 {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
     @IBInspectable public var dashSpacing: CGFloat = 0.0 {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
@@ -53,24 +73,40 @@ import UIKit
     @IBInspectable public var shadowColor: UIColor = UIColor.clear {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
     @IBInspectable public var shadowSize: CGFloat = 0.0 {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
     @IBInspectable public var shadowOpacity: CGFloat = 1.0 {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
     @IBInspectable public var shadowOffset: CGSize = CGSize.zero {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
@@ -78,24 +114,40 @@ import UIKit
     @IBInspectable public var gradientStart: CGPoint = CGPoint(x:0, y:0) {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
     @IBInspectable public var gradientEnd: CGPoint = CGPoint(x:0, y:0) {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
     @IBInspectable public var firstColor: UIColor = UIColor.clear {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
 
     @IBInspectable public var secondColor: UIColor = UIColor.clear {
         didSet {
             setNeedsLayout()
+            
+            #if TARGET_INTERFACE_BUILDER
+                layoutSubviews()
+            #endif
         }
     }
     
