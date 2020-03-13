@@ -112,7 +112,7 @@ import UIKit
         shapeBorderLayer.needsDisplayOnBoundsChange = true
         
         /// Setup the gradient to be used in background
-        gradientBackgroundLayer.frame = self.frame
+        gradientBackgroundLayer.frame = self.bounds
         gradientBackgroundLayer.cornerRadius = self.cornerRadius
         gradientBackgroundLayer.startPoint = self.gradientStart
         gradientBackgroundLayer.endPoint = self.gradientEnd
@@ -121,7 +121,7 @@ import UIKit
         /// Setup the border
         shapeBorderLayer.frame = self.bounds
         shapeBorderLayer.lineWidth = self.borderWidth
-        shapeBorderLayer.path = UIBezierPath(roundedRect: self.frame, cornerRadius: self.cornerRadius).cgPath
+        shapeBorderLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.cornerRadius).cgPath
         
         shapeBorderLayer.fillColor = nil
         shapeBorderLayer.strokeColor = borderColor.cgColor
@@ -132,7 +132,7 @@ import UIKit
         
         /// Setup the shadow
         self.layer.shadowColor = shadowColor.cgColor
-        self.layer.shadowPath = UIBezierPath(roundedRect: self.frame, cornerRadius: self.cornerRadius).cgPath
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.cornerRadius).cgPath
         self.layer.shadowOffset = shadowOffset
         self.layer.shadowRadius = shadowSize
         
@@ -140,7 +140,7 @@ import UIKit
             self.layer.shadowOpacity = Float(shadowOpacity)
         }
         
-        self.layer.frame = self.frame
+        self.layer.frame = self.bounds
         
         self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
         self.layer.insertSublayer(shapeBorderLayer, at: 1)
