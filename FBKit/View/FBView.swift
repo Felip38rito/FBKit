@@ -22,9 +22,7 @@ import UIKit
             self.layer.cornerRadius = self.cornerRadius
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
@@ -32,9 +30,7 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
@@ -42,9 +38,7 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
@@ -53,9 +47,7 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
@@ -63,9 +55,7 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
@@ -74,9 +64,7 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
@@ -84,9 +72,7 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
@@ -94,9 +80,7 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
@@ -104,9 +88,7 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
@@ -115,9 +97,7 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
@@ -125,9 +105,7 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
@@ -135,9 +113,7 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
 
@@ -145,18 +121,11 @@ import UIKit
         didSet {
             setNeedsLayout()
             
-            #if TARGET_INTERFACE_BUILDER
-                layoutSubviews()
-            #endif
+            updateView()
         }
     }
     
-    /// Update the visual changes
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        print("LayoutSubviews called on FBView instance...")
-        
+    internal func updateView() {
         gradientBackgroundLayer.removeFromSuperlayer()
         shapeBorderLayer.removeFromSuperlayer()
         
@@ -196,5 +165,14 @@ import UIKit
         
         self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
         self.layer.insertSublayer(shapeBorderLayer, at: 1)
+    }
+    
+    /// Update the visual changes
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        print("LayoutSubviews called on FBView instance...")
+        
+        updateView()
     }
 }
