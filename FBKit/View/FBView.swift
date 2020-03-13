@@ -140,6 +140,8 @@ import UIKit
             self.layer.shadowOpacity = Float(shadowOpacity)
         }
         
+        self.layer.frame = self.bounds
+        
         self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
         self.layer.insertSublayer(shapeBorderLayer, at: 1)
     }
