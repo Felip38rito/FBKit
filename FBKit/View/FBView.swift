@@ -20,87 +20,87 @@ import UIKit
     @IBInspectable public var cornerRadius : CGFloat = 0.0 {
         didSet {
             self.layer.cornerRadius = self.cornerRadius
-            updateView()
+            setNeedsLayout()
         }
     }
     
     @IBInspectable public var borderWidth: CGFloat = 0.0 {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
     
     @IBInspectable public var borderColor: UIColor = UIColor.clear {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
     
     // MARK: - Dash items
     @IBInspectable public var dashWidth: CGFloat = 1.0 {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
     
     @IBInspectable public var dashSpacing: CGFloat = 0.0 {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
     
     // MARK: - Shadow
     @IBInspectable public var shadowColor: UIColor = UIColor.clear {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
     
     @IBInspectable public var shadowSize: CGFloat = 0.0 {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
     
     @IBInspectable public var shadowOpacity: CGFloat = 1.0 {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
     
     @IBInspectable public var shadowOffset: CGSize = CGSize.zero {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
     
     // MARK: - Gradient
     @IBInspectable public var gradientStart: CGPoint = CGPoint(x:0, y:0) {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
     
     @IBInspectable public var gradientEnd: CGPoint = CGPoint(x:0, y:0) {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
     
     @IBInspectable public var firstColor: UIColor = UIColor.clear {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
 
     @IBInspectable public var secondColor: UIColor = UIColor.clear {
         didSet {
-            updateView()
+            setNeedsLayout()
         }
     }
     
     /// Update the visual changes
-    public func updateView() {
+    open override func layoutSubviews() {
         gradientBackgroundLayer.removeFromSuperlayer()
         shapeBorderLayer.removeFromSuperlayer()
         
@@ -136,4 +136,8 @@ import UIKit
         self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
         self.layer.insertSublayer(shapeBorderLayer, at: 1)
     }
+    
+//    open override func layoutSubviews() {
+//        updateView()
+//    }
 }
