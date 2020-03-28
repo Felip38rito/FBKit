@@ -10,6 +10,7 @@ import UIKit
 
 // prototipo da classe FBTextField
 @IBDesignable public class FBTextField: UITextField {
+    
     internal var padding: UIEdgeInsets {
         get {
             return UIEdgeInsets(top: 0, left: textInset, bottom: 0, right: textInset)
