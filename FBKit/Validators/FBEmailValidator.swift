@@ -19,4 +19,8 @@ public class FBEmailValidator: FBRegexValidator {
             return "\(firstPart)@\(serverPart)\(end)"
         }
     }
+    
+    public init() {
+        
+    }
 }
