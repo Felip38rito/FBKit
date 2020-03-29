@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 //! Project version number for FBKit.
 FOUNDATION_EXPORT double FBKitVersionNumber;
