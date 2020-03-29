@@ -13,6 +13,7 @@ import Foundation
 /**
  FBKit scheme for use and control the camera
  */
+@available(iOS 11.0, *)
 open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapturePhotoCaptureDelegate {
     
     var session: AVCaptureSession
@@ -32,8 +33,10 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
         
         AVCaptureDevice.requestAccess(for: .video) { (success) in
             if success {
-                self.delegate.accessGranted()
                 
+                DispatchQueue.main.async {
+                    self.delegate.accessGranted()
+                }
                 /// Com permissao garantida, inicializamos a classe corretamente
                 
                 self.session.sessionPreset = preset
@@ -51,7 +54,9 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
                 }
                 
             } else {
-                self.delegate.accessDenied()
+                DispatchQueue.main.async {
+                    self.delegate.accessDenied()
+                }
             }
         }
     }
@@ -186,6 +191,7 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
     }
 }
 
+@available(iOS 11.0, *)
 public protocol FBCameraDelegate {
     func accessGranted()
     func accessDenied()
@@ -194,6 +200,7 @@ public protocol FBCameraDelegate {
     func foundFace(with: VNRequest)
 }
 
+@available(iOS 11.0, *)
 public extension FBCameraDelegate {
     func accessGranted(){ }
     func accessDenied(){ }
