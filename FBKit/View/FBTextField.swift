@@ -9,7 +9,7 @@
 import UIKit
 
 // prototipo da classe FBTextField
-@IBDesignable public class FBTextField: UITextField {
+@IBDesignable open class FBTextField: JMMaskTextField {
     
     internal var padding: UIEdgeInsets {
         get {
