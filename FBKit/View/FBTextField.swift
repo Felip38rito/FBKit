@@ -53,7 +53,6 @@ import UIKit
         didSet {
             self.setPlaceholderColor(self.placeholderColor)
             setNeedsLayout()
-            updateView()
         }
     }
     
@@ -72,7 +71,8 @@ import UIKit
         return bounds.inset(by: padding)
     }
     
-    public func updateView() {
+    open func updateView() {
+        print("Parent updateView")
         self.borderStyle = .none
         self.clipsToBounds = true
     }
