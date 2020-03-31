@@ -7,10 +7,14 @@
 
 import Foundation
 
-/// Default Regular Expression Validator
-public protocol FBRegexValidator {
-    var regex: String { get }
+/// Default validator
+public protocol FBValidator {
     func isValid(_ text: String) -> Bool
+}
+
+/// Default Regular Expression Validator
+public protocol FBRegexValidator: FBValidator {
+    var regex: String { get }
 }
 
 public extension FBRegexValidator {
