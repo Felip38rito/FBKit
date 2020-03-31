@@ -9,8 +9,12 @@
 import Foundation
 
 /// Garante que nao seja um texto vazio, ou apenas com espaços
-class FBRequiredValidator: FBValidator {
-    func isValid(_ text: String) -> Bool {
+public class FBRequiredValidator: FBValidator {
+    public func isValid(_ text: String) -> Bool {
         return text.replacingOccurrences(of: " ", with: "") != ""
+    }
+    
+    public init() {
+        
     }
 }
