@@ -87,7 +87,9 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
      Inicializa o processo da camera
      */
     open func start() {
-        session.startRunning()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.session.startRunning()
+        }
     }
     
     /**
