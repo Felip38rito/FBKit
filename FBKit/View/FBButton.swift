@@ -112,8 +112,6 @@ import UIKit
     open override func layoutSubviews() {
         super.layoutSubviews()
         
-        print("LayoutSubviews called on FBView instance...")
-        
         updateView()
     }
 }

@@ -163,8 +163,8 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
     open func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard let metadata = photo.fileDataRepresentation() else { return }
         guard let uiimage = UIImage(data: metadata) else { return }
-
-        delegate.didTake(frame: uiimage)
+        
+        delegate.didTake(photo: uiimage)
     }
     
     open func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -174,6 +174,9 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
         
         let ciimage = CIImage(cvPixelBuffer: imageBuffer)
         let uiimage = UIImage(ciImage: ciimage)
+        
+        print(uiimage)
+        print(delegate)
         
         delegate.didTake(frame: uiimage)
         
