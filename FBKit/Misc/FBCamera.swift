@@ -122,6 +122,8 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
     */
     open func lookForFaces() {
         self.findFaces = true
+        
+        addEnterFrameDelegate()
     }
     
     private func addPermanentListeners() {
@@ -141,6 +143,8 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
     
     /// Captura o evento "enter frame" do video da camera e chama captureOutput do delegate informado
     private func addEnterFrameDelegate() {
+        print("Try to add delegate")
+        
         let dataOutputQueue = DispatchQueue(
             label: "video data queue",
             qos: .userInitiated,
@@ -157,6 +161,8 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
         
         if session.canAddOutput(videoOutput) {
             session.addOutput(videoOutput)
+        } else {
+            print("FBCamera log: Can't add the output for delegate video")
         }
     }
     
@@ -175,9 +181,6 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
         let ciimage = CIImage(cvPixelBuffer: imageBuffer)
         let uiimage = UIImage(ciImage: ciimage)
         
-        print(uiimage)
-        print(delegate)
-        
         delegate.didTake(frame: uiimage)
         
         guard findFaces else { return }
@@ -192,7 +195,10 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
     }
     
     func detectedFace(request: VNRequest, error: Error?) {
-        delegate.foundFace(with: request)
+        guard let results = request.results as? [VNFaceObservation] else { return }
+        guard let result = results.first else { return }
+        
+        delegate.foundFace(with: result)
     }
 }
 
@@ -202,7 +208,7 @@ public protocol FBCameraDelegate {
     func accessDenied()
     func didTake(photo: UIImage)
     func didTake(frame: UIImage)
-    func foundFace(with: VNRequest)
+    func foundFace(with: VNFaceObservation)
 }
 
 @available(iOS 11.0, *)
@@ -211,5 +217,5 @@ public extension FBCameraDelegate {
     func accessDenied(){ }
     func didTake(photo: UIImage){ }
     func didTake(frame: UIImage){ }
-    func foundFace(with: VNRequest){ }
+    func foundFace(with: VNFaceObservation) { }
 }
