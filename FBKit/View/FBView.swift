@@ -125,6 +125,13 @@ import UIKit
         }
     }
     
+    @IBInspectable public var rotationAngle: CGFloat = 0 {
+        didSet {
+            setNeedsLayout()
+            updateView()
+        }
+    }
+    
     internal func updateView() {
         gradientBackgroundLayer.removeFromSuperlayer()
         shapeBorderLayer.removeFromSuperlayer()
@@ -165,6 +172,11 @@ import UIKit
         
         self.layer.insertSublayer(gradientBackgroundLayer, at: 0)
         self.layer.insertSublayer(shapeBorderLayer, at: 1)
+        
+        /// Setup the angle
+        let radians = self.rotationAngle / 180.0 * CGFloat.pi
+        let rotation = self.transform.rotated(by: radians)
+        self.transform = rotation
     }
     
     /// Update the visual changes
