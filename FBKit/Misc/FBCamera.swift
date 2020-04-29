@@ -88,7 +88,11 @@ open class FBCamera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, AVC
      */
     open func start() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            #if targetEnvironment(simulator)
+            /// Não podemos utilizar camera nos simuladores, certo? :)
+            #else
             self.session.startRunning()
+            #endif
         }
     }
     
