@@ -58,7 +58,7 @@ open class FBLayoutConstraint: NSLayoutConstraint {
     }
 }
 
-fileprivate extension UIDevice {
+internal extension UIDevice {
     var iPhoneX: Bool {
         return UIScreen.main.nativeBounds.height == 2436
     }
