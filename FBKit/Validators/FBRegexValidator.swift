@@ -20,7 +20,7 @@ public protocol FBRegexValidator: FBValidator {
 public extension FBRegexValidator {
     func isValid(_ text: String) -> Bool {
         do {
-            let regexTest = try NSRegularExpression(pattern: regex, options: .caseInsensitive)
+            let regexTest = try NSRegularExpression(pattern: regex)
             return regexTest.firstMatch(in: text, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, text.count)) != nil
         
         } catch {
