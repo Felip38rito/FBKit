@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// FBKeyboardDelegate can inform you when the keyboard will show up and when it will disappear
+/// it also inform the rect of the keyboard in it's methods
 public protocol FBKeyboardDelegate {
-    func keyboardWillAppear()
+    func keyboardWillAppear(with height: CGFloat)
     func keyboardWillDisappear()
 }
 
@@ -24,11 +26,13 @@ public class FBKeyboardObserver {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc internal func keyboardAppear() {
-        delegate.keyboardWillAppear()
+    @objc internal func keyboardAppear(_ notification: NSNotification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        delegate.keyboardWillAppear(with: keyboardFrame.cgRectValue.height)
     }
     
-    @objc internal func keyboardDisappear() {
+    @objc internal func keyboardDisappear(_ notification: NSNotification) {
         delegate.keyboardWillDisappear()
     }
 }
