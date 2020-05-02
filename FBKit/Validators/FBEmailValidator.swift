@@ -8,14 +8,15 @@
 import Foundation
 
 public class FBEmailValidator: FBRegexValidator {
-    public var regex: String {
-        get {
-            
+    public init() {
+        let regex: String = {
             return "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-        }
+        }()
+        
+        super.init(regex)
     }
     
-    public init() {
-        
+    public override func isValid(_ text: String) -> Bool {
+        super.isValid(text.trimmingCharacters(in: CharacterSet(charactersIn: " ")))
     }
 }

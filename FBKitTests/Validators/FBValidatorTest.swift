@@ -33,10 +33,15 @@ class FBValidatorTest: XCTestCase {
         // my email is valid: letters and numbers
         XCTAssertTrue(emailValidator.isValid("felip38rito@gmail.com"))
         XCTAssertTrue(emailValidator.isValid("onlyletters@gmail.com"))
+        
         /// only a empty string is not valid
         XCTAssertFalse(emailValidator.isValid(""))
+        
         /// two @ is not valid
         XCTAssertFalse(emailValidator.isValid("felip@teds@gmail.com"))
+        
+        /// The assert passes on trim
+        XCTAssertTrue(emailValidator.isValid(" felipe.correia.wd@gmail.com   "))
     }
     
     func testCanValidateRequiredField() {
