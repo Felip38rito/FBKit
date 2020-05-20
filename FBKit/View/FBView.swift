@@ -125,10 +125,12 @@ import UIKit
         }
     }
     
-    @IBInspectable public var rotationAngle: CGFloat = 0 {
-        didSet {
-            setNeedsLayout()
-            updateView()
+    @IBInspectable public var rotationAngle: Int {
+        get {
+            return 0
+        } set {
+            let radians = ((CGFloat.pi) * CGFloat(newValue) / CGFloat(180.0))
+            self.transform = CGAffineTransform(rotationAngle: radians)
         }
     }
     
@@ -174,9 +176,9 @@ import UIKit
         self.layer.insertSublayer(shapeBorderLayer, at: 1)
         
         /// Setup the angle
-        let radians = self.rotationAngle / 180.0 * CGFloat.pi
-        let rotation = self.transform.rotated(by: radians)
-        self.transform = rotation
+//        let radians = self.rotationAngle / 180.0 * CGFloat.pi
+//        let rotation = self.transform.rotated(by: radians)
+//        self.transform = rotation
     }
     
     /// Update the visual changes
